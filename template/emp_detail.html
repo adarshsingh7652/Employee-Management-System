@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Employee Management System</title>
+<link rel="stylesheet" href="{% static 'emp_style.css' %}">
+</head>
+<body>
+
+<h2>Employee Management System</h2>
+<form method="post">
+  {% csrf_token %}
+<input  id="btn" type="search" placeholder="Enter Id" name="btn">
+<input  type="submit" value="search">
+</form>
+<br><br>
+
+<a href="{% url 'form' %}"><button class="add-button">Add Employee</button></a>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Department</th>
+      <th>Position</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  {% for i in fn %}
+  <tbody>
+    <tr>
+      <td>{{i.id}}</td>
+      <td>{{i.Name | upper | safe }}</td>
+      <td>{{i.Email}}</td>
+      <td>{{i.Department}}</td>
+      <td>{{i.Position}}</td>
+      
+      <td>
+        
+        
+      <a href="{% url 'delet' i.id %}"><button >Delete</button></a>
+      <a href="{% url 'update' i.id %}" ><button >Edit</button></a>
+      </td>
+    
+    </tr>
+
+    <!-- Add more rows as needed -->
+  </tbody>
+  {% endfor %}
+</table>
+
+</body>
+</html>
